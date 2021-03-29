@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -33,12 +34,14 @@ public class MainActivity extends AppCompatActivity {
     List<country> data = new ArrayList<>();
     List<String> names = new ArrayList<>();
     CountryDatabase database;
+    Button delbtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ListView listView = findViewById(R.id.listview);
+        final ListView listView = findViewById(R.id.listview);
         database = CountryDatabase.getInstance(this);
+        delbtn = findViewById(R.id.delbtn);
         data = database.countryDao().getAll();
         RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
         final String url ="https://restcountries.eu/rest/v2/all";
@@ -109,5 +112,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        delbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                database.countryDao().DeleteAll();
+            }
+        });
     }
 }

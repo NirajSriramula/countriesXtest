@@ -42,7 +42,9 @@ public class Details extends AppCompatActivity {
             population.setText("Population : " + details.getPopulation());
             borders.setText("Borders : " + details.getBorders());
             languages.setText("Languages : " + details.getLanguages());
-            SvgLoader.pluck().with(this).load(details.getFlagurl(), flag);
+
+            //the following statement is not working in the emulator so please install it on a device before using it.
+            //SvgLoader.pluck().with(this).load(details.getFlagurl(), flag);
 
 
 
